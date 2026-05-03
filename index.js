@@ -1,8 +1,12 @@
-var fields = document.querySelectorAll("form-user-create [name]");
+var fields = document.querySelectorAll("#form-user-create [name]");
 var user = {};
 
-fields.forEach(function (field, index) {
-   
+document.getElementById('form-user-create').addEventListener("submit", function(event){
+
+   event.preventDefault();
+
+   fields.forEach(function (field, index) {
+
   if (field.name == "gender") {
 
     if (field.checked === true) {
@@ -18,5 +22,4 @@ fields.forEach(function (field, index) {
   }
 });
 
-console.log('Pasou');
-console.log('JSON ' , user);
+});
