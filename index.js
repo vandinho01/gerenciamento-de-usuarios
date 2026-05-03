@@ -1,8 +1,8 @@
-var nome = document.querySelector("#exampleInputName");
-var masc = document.querySelector('#exampleInputGenderM');
-var fem = document.querySelector('exampleInputGenderF');
-var nasc = document.querySelector('#exampleInputBirth');
-var pais = document.querySelector('#exampleInputCountry');
-var email = document.querySelector('#exampleInputEmail1');
-var senha = document.querySelector('exampleInputPassword1');
-var foto = document.querySelector('#exampleInputFile');
+var name = document.querySelector("#exampleInputName");
+var gender = document.querySelectorAll('#form-user-create [name=gender]:checked');
+var birth = document.querySelector('#exampleInputBirth');
+var country = document.querySelector('#exampleInputCountry');
+var email = document.querySelector('#exampleInputEmail');
+var password = document.querySelector('exampleInputPassword');
+var photo = document.querySelector('#exampleInputFile');
+var admin = document.querySelector('#exampleInputAdmin');
