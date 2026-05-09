@@ -9,6 +9,7 @@ class UserController {
         this.selectAll();
     }
 
+    //Edita o usuário existente
     onEdit() {
 
         document.querySelector('#box-user-update .btn-cancel').addEventListener('click', e => {
@@ -67,6 +68,7 @@ class UserController {
 
     }
 
+    //Cria um novo usuário
     onSubmit() {
 
         this.formEl.addEventListener("submit", event => {
@@ -77,8 +79,10 @@ class UserController {
 
             let values = this.getValues(this.formEl);
 
-            if (!values) return false;
-
+            if (!values) {
+                btn.disabled = false;
+                return false;
+            }
 
             this.getPhoto(this.formEl).then((content) => {
                 values.photo = content;
@@ -97,13 +101,13 @@ class UserController {
         });
     }
 
+    // Lê a foto
     getPhoto(formEl) {
 
         return new Promise((resolve, reject) => {
+            const fileReader = new FileReader();
 
-            let fileReader = new FileReader();
-
-            let elements = [...formEl.elements].filter(item => {
+            const elements = [...formEl.elements].filter(item => {
                 if (item.name === 'photo') {
                     return item;
                 }
@@ -129,16 +133,21 @@ class UserController {
         });
     }
 
+    // Lê e valida o formulário
     getValues(formEl) {
         let user = {};
         let isValide = true;
 
-        [...formEl.elements].forEach(function (field, index) {
+        [...formEl.elements].forEach((field, index) => {
 
             if (['name', 'email', 'password'].indexOf(field.name) > -1 && !field.value) {
 
                 field.parentElement.classList.add('has-error');
                 isValide = false;
+
+            } else if (field.parentElement.classList.contains('has-error')) {
+
+                field.parentElement.classList.remove('has-error');
 
             }
 
@@ -171,11 +180,12 @@ class UserController {
         );
     } //Fechando a classe GetValues
 
-    selectAll(){
+    // Carrega usuários salvos
+    selectAll() {
 
         let users = User.getUserStorage();
 
-        users.forEach(dataUser=>{
+        users.forEach(dataUser => {
 
             let user = new User();
 
@@ -187,6 +197,7 @@ class UserController {
 
     }
 
+    //Adiciona linha na tabela
     addLine(dataUser) {
 
         let tr = this.getTr(dataUser);
@@ -197,12 +208,13 @@ class UserController {
 
     }
 
-    getTr(dataUser, tr = null){
+    // Monta o HTML de uma linha
+    getTr(dataUser, tr = null) {
 
         if (tr === null) tr = document.createElement('tr');
 
         tr.dataset.user = JSON.stringify(dataUser);
-        
+
         tr.innerHTML = `
             <td><img src="${dataUser.photo}" alt="User Image" class="img-circle img-sm"></td>
             <td>${dataUser.name}</td>
@@ -215,17 +227,18 @@ class UserController {
             </td>
         `;
 
-         this.addEventsTr(tr);
+        this.addEventsTr(tr);
 
-         return tr;
+        return tr;
 
     }
 
+    // Liga eventos da linha
     addEventsTr(tr) {
 
         tr.querySelector('.btn-delete').addEventListener("click", e => {
 
-            if(confirm("Deseja realmente excluir?")){
+            if (confirm("Deseja realmente excluir?")) {
                 let user = new User();
 
                 user.loadFromJSON(JSON.parse(tr.dataset.user));
@@ -280,6 +293,7 @@ class UserController {
         });
     }
 
+    // Exibe o formulário de criação
     showPanelCreate() {
 
         document.getElementById('box-user-create').style.display = 'block';
@@ -287,6 +301,7 @@ class UserController {
 
     }
 
+    // Exibe o formulário de edição
     showPanelUpdate() {
 
         document.getElementById('box-user-create').style.display = 'none';
@@ -294,6 +309,7 @@ class UserController {
 
     }
 
+    // Atualiza os contadores ( Usuário e administradores);
     updateCount() {
 
         let numberUsers = 0;
