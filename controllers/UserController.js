@@ -7,6 +7,7 @@ class UserController {
         this.onSubmit();
         this.onEdit();
         this.selectAll();
+        this.onComparePassword();
     }
 
     //Edita o usuário existente
@@ -328,6 +329,33 @@ class UserController {
         document.querySelector("#number-users").innerHTML = numberUsers;
         document.querySelector("#number-users-admin").innerHTML = numberAdmin;
 
+
+    }
+
+    onComparePassword() {
+        let primayPassword = document.querySelector('.password-1');
+        let secondPassword = document.querySelector('.password-2');
+        let span = document.querySelector('.span-required');
+        let btnForm = this.formEl.querySelector('[type=submit]');
+
+        secondPassword.addEventListener('input', () => {
+
+            if (primayPassword.value == secondPassword.value) {
+                span.style.display = 'none';
+                secondPassword.style.border = '';
+                btnForm.disabled = false;
+
+
+            } else {
+                span.style.display = '';
+                span.style.color = 'red';
+                secondPassword.style.border = '1px solid red'
+                btnForm.disabled = true;
+                
+
+            }
+
+        })
 
     }
 
