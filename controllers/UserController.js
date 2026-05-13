@@ -7,7 +7,12 @@ class UserController {
         this.onSubmit();
         this.onEdit();
         this.selectAll();
-        this.onComparePassword();
+        this.onComparePassword(this.formEl);  
+        this.onComparePassword(this.formUpdateEl); 
+        this.emailValidate(this.formEl); 
+        this.emailValidate(this.formUpdateEl);  
+        this.viewPassword(this.formEl);
+        this.viewPassword(this.formUpdateEl);    
     }
 
     //Edita o usuário existente
@@ -329,34 +334,52 @@ class UserController {
         document.querySelector("#number-users").innerHTML = numberUsers;
         document.querySelector("#number-users-admin").innerHTML = numberAdmin;
 
-
     }
 
-    onComparePassword() {
-        let primayPassword = document.querySelector('.password-1');
-        let secondPassword = document.querySelector('.password-2');
-        let span = document.querySelector('.span-required');
-        let btnForm = this.formEl.querySelector('[type=submit]');
+    onComparePassword(formEl) {
+        let primaryPassword = formEl.querySelector('.password-1');
+        let secondPassword = formEl.querySelector('.password-2');
+        let span = formEl.querySelector('.span-required');
+        let btnForm = formEl.querySelector('[type=submit]');
 
         secondPassword.addEventListener('input', () => {
 
-            if (primayPassword.value == secondPassword.value) {
-                span.style.display = 'none';
-                secondPassword.style.border = '';
-                btnForm.disabled = false;
+            const isMatch = primaryPassword.value == secondPassword.value;
 
+            span.style.display = isMatch ? 'none' : '';
+            span.style.color = 'red'; 
+            secondPassword.style.border = isMatch ? '' : '1px solid red';  
+            btnForm.disabled = !isMatch;
 
-            } else {
-                span.style.display = '';
-                span.style.color = 'red';
-                secondPassword.style.border = '1px solid red'
-                btnForm.disabled = true;
-                
+        });
 
-            }
+    }
 
+    emailValidate(formEl) {
+
+        const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        const spanEmail = formEl.querySelector('.span-email');
+        let email = formEl.querySelector('.input-email');
+        const btnForm = formEl.querySelector('[type=submit]');
+
+        email.addEventListener('input', () => {
+
+            const isValid = emailRegex.test(email.value);
+            spanEmail.style.display = isValid ? 'none' : '';
+            spanEmail.style.color = 'red';
+            email.style.border = isValid ? '' : '1px solid red'
+            btnForm.disabled = !isValid;
+
+        });
+    }
+
+    viewPassword(formEl){
+        let inputPassword_1 = formEl.querySelector('.password-1');
+        let btnViewPass = formEl.querySelector('#btn-senha');
+
+        btnViewPass.addEventListener('click', () => {
+            inputPassword_1.type = inputPassword_1.type == 'password' ? 'text' : 'password'
         })
-
     }
 
 }

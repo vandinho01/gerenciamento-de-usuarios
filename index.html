@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="bower_components/Ionicons/css/ionicons.min.css">
   <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
   <link rel="stylesheet" href="dist/css/skins/skin-blue.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
 </head>
 
 <body class="hold-transition skin-blue sidebar-mini">
@@ -472,15 +473,22 @@
                 </div>
                 <div class="form-group">
                   <label for="exampleInputEmail1">E-mail</label>
-                  <input type="email" class="form-control" id="exampleInputEmail" placeholder="Digite o e-mail" name="email">
+                  <input type="email" class="form-control input-email" id="exampleInputEmail" placeholder="Digite o e-mail" name="email">
+                  <span class="span-email" style="display: none;">Digite um e-mail válido</span>
                 </div>
                 <div class="form-group">
                   <label for="exampleInputPassword1">Senha</label>
-                  <input type="password" class="form-control password-1" id="exampleInputPassword"  placeholder="Crie uma senha" name="password" >
+                  <div class="form-eye">
+                    <input type="password" class="form-control password-1" id="exampleInputPassword"  placeholder="Crie uma senha" name="password">
+                    <i class="bi bi-eye" id="btn-senha"></i>
+                  </div>
                 </div>
                 <div class="password-repeat">
                   <label for="exampleInputPassword1">Insira a senha novamente</label>
-                  <input type="password" class="form-control password-2" id="exampleInputPassword" placeholder="Repita sua senha" name="password">
+                  <div class="form-eye">
+                    <input type="password" class="form-control password-2" id="exampleInputPassword" placeholder="Repita sua senha" name="password">
+                    <i class="bi bi-eye" id="btn-senha"></i>
+                  </div>
                   <span class="span-required" style="display: none;" >Senhas devem ser compatíveis</span>
                 </div>
                 <div class="form-group">
@@ -778,15 +786,22 @@
                 </div>
                 <div class="form-group">
                   <label for="exampleInputEmail1">E-mail</label>
-                  <input type="email" class="form-control" id="exampleInputEmail" placeholder="Digite o e-mail" name="email">
+                  <input type="email" class="form-control input-email" id="exampleInputEmail" placeholder="Digite o e-mail" name="email">
+                  <span class="span-email" style="display: none;">Digite um e-mail válido</span>
                 </div>
                 <div class="form-group">
                   <label for="exampleInputPassword1">Senha</label>
-                  <input type="password" class="form-control password-1" id="exampleInputPassword"  placeholder="Crie uma senha" name="password" >
+                  <div class="form-eye">
+                    <input type="password" class="form-control password-1" id="exampleInputPassword"  placeholder="Crie uma senha" name="password" >
+                    <i class="bi bi-eye" id="btn-senha"></i>
+                  </div>
                 </div>
                 <div class="password-repeat">
                   <label for="exampleInputPassword1">Insira a senha novamente</label>
-                  <input type="password" class="form-control password-2" id="exampleInputPassword" placeholder="Repita sua senha" name="password">
+                  <div class="form-eye">
+                    <input type="password" class="form-control password-2" id="exampleInputPassword" placeholder="Repita sua senha" name="password">
+                    <i class="bi bi-eye" id="btn-senha"></i>
+                  </div>
                   <span class="span-required" style="display: none;" >Senhas devem ser compatíveis</span>
                 </div>
                 <div class="form-group">
@@ -827,6 +842,20 @@
   </footer>
 
 </div>
+
+<style>
+  .form-eye {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+
+  .form-eye i {
+    position: absolute;
+    right: 10px;
+    cursor: pointer;
+  }
+</style>
 
 <script src="classes/Utils.js"></script>
 <script src="models/User.js"></script>

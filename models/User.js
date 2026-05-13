@@ -75,7 +75,7 @@ class User {
     static getUserStorage() {
         let users = [];
 
-        const stored = localStorage.getItem("user");
+        const stored = localStorage.getItem("users");
         return stored ? JSON.parse(stored) : [];
 
     };
@@ -83,13 +83,9 @@ class User {
     getNewId() {
 
         let usersID = parseFloat(localStorage.getItem('usersID'));
-
         if (!usersID) usersID = 0;
-
         usersID++;
-
         localStorage.setItem('usersID', usersID);
-
         return usersID;
 
     }
